@@ -5,6 +5,11 @@ from django.contrib.auth.models import User
 #
 # Create your models here.
 
+class PublishedManager(models.Model):
+
+    def getQuerySet(self):
+        result = super(PublishedManager, self).getQuerySet.filter(status = 'published')
+        return result
 
 class Post(models.Model):
 
@@ -31,3 +36,6 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
+    object = models.Manager()
+    published = PublishedManager()
